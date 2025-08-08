@@ -4,14 +4,23 @@ public class PlayerCollision : MonoBehaviour
 {
 
     public movement_script movement;
-    void OnCollisionEnter(Collision collisionInfo) {
+    public int health = 3;
 
-        
-        
-        if (collisionInfo.collider.tag == "Obstacle")
-        Debug.Log("hit");
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if (collisionInfo.collider.CompareTag("Obstacle"))
+        {
+            if (health > 0)
+            {
+                Debug.Log("hit");
+                health -= 1;
 
-        //movement.enabled =false;
-
+                if (health <= 0)
+                {
+                    movement.enabled = false;
+                    FindObjectOfType<GameManager>().EndGame();
+                }
+            }
+        }
     }
 }

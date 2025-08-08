@@ -94,6 +94,11 @@ public class movement_script : MonoBehaviour
             rb.AddForce(0, 0, backwardForce * Time.deltaTime, ForceMode.VelocityChange);
         }
 
+        if (rb.position.y < -1f) {
+            FindObjectOfType<GameManager>().EndGame();
+        }
+
+
         // Jump
         if (Input.GetKeyDown(KeyCode.Space))
         {
